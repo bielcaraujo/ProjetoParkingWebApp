@@ -1,5 +1,20 @@
+<%@page import="com.domain.web.VehicleStay"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String enterParkingErrorMessage = null;
+    if(request.getParameter("enter-parkig") != null){
+        String model = request.getParameter("model");
+        String color = request.getParameter("color");
+        String plate = request.getParameter("plate");
+        try{
+            VehicleStay.addVehicleStay(model, color, plate);
+            response.sendRedirect(request.getRequestURI());
+        }catch(Exception e){
+            enterParkingErrorMessage = e.getMessage();
+        }
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
